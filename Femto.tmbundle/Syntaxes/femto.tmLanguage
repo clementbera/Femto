@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>src</string>
+	</array>
+	<key>name</key>
+	<string>femto</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>match</key>
+			<string>\b(fixedClass|abstract|extends|classSide|arrayClass|nativeClass|weakClass|immediateClass|binary|intrinsic|function)\b</string>
+			<key>name</key>
+			<string>pillar.bold</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(this|super|var|return|if|else|while|for)\b</string>
+			<key>name</key>
+			<string>pillar.title</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>#"</string>
+			<key>end</key>
+			<string>"</string>
+			<key>name</key>
+			<string>pillar.code</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>"</string>
+			<key>end</key>
+			<string>"</string>
+			<key>name</key>
+			<string>pillar.code</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(true|false|null)\b</string>
+			<key>name</key>
+			<string>pillar.code</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>inc</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.digit-separator-should-not-be-last.c++</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?x)\b
+			(  (?i:
+			      0x ( [0-9A-Fa-f]+ ( ' [0-9A-Fa-f]+ )* )?  # Hexadecimal
+			     |   ( [0-9]+       ( ' [0-9]+ )* )         # Decimal
+			   )
+			   ( ([uUfF] | u?ll? | U?LL?)\b | (?&lt;inc&gt;') | \b )
+			|  ( [0-9]+ ( ' [0-9]+ )* )?
+			   (?i:
+			      \. ( [0-9]+ ( ' [0-9]+ )* ) E(\+|-)? ( [0-9]+ ( ' [0-9]+ )* )
+			   |  \. ( [0-9]+ ( ' [0-9]+ )* )
+			   |  E(\+|-)? ( [0-9]+ ( ' [0-9]+ )* )
+			   )
+			   ( (?&lt;inc&gt;') | \b )
+			)</string>
+			<key>name</key>
+			<string>pillar.code</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>//</string>
+			<key>end</key>
+			<string>\n</string>
+			<key>name</key>
+			<string>pillar.comment</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>end</key>
+			<string>\*/</string>
+			<key>name</key>
+			<string>pillar.comment</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.femto</string>
+	<key>uuid</key>
+	<string>914D4B5B-36DF-4887-A870-449B3ED42002</string>
+</dict>
+</plist>
