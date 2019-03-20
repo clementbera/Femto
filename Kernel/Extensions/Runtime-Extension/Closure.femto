@@ -1,0 +1,12 @@
+fixedClass Closure(compiledCode,tempVector) extends Object {
+	//tempVector is an array or nil, depending if actually used.
+	
+	function cull(arg1){
+		return (compiledCode,getNumArgs() < 1).ifTrueIfFalse([]{this.value()},[]{this.value(arg1)})
+	}
+	
+	function cull(arg1,arg2){
+		return (compiledCode,getNumArgs() < 2).ifTrueIfFalse([]{this.cull(arg1)},[]{this.value(arg1,arg2)})
+	}
+	
+}

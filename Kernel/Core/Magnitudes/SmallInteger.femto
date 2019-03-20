@@ -1,0 +1,110 @@
+immediateClass SmallInteger() extends Integer {
+	
+	// Arithmetic
+	
+	intrinsic(10) binary function + aNumber {
+		//Answers a Smi or LargeInteger. If Overflow and LargeInteger not installed, crashes the VM.
+		this.unfailingIntrinsic("+");
+	}
+	
+	intrinsic(11) binary function - aNumber {
+		//Answers a Smi or LargeInteger. If Overflow and LargeInteger not installed, crashes the VM.
+		this.unfailingIntrinsic("-");
+	}
+	
+	intrinsic(12) binary function * aNumber {
+		//Answers a Smi or LargeInteger. If Overflow and LargeInteger not installed, crashes the VM.
+		this.unfailingIntrinsic("*");
+	}
+	
+	intrinsic(13) binary function / aNumber {
+		//Answers a Smi or LargeInteger. If Overflow and LargeInteger not installed, crashes the VM.
+		// WARNING: integer division
+		this.unfailingIntrinsic("/");
+	}
+	intrinsic(14) binary function % aNumber {
+		//Answers a Smi or LargeInteger. If Overflow and LargeInteger not installed, crashes the VM.
+		this.unfailingIntrinsic("%");
+	}
+	
+	// Comparison behavior
+	intrinsic(15) binary function < aNumber {
+		this.unfailingIntrinsic("<");
+	}
+	
+	intrinsic(16) binary function <= aNumber {
+		this.unfailingIntrinsic("<=");
+	}
+	
+	intrinsic(17) binary function == aNumber {
+		this.unfailingIntrinsic("==");
+	}
+	
+	intrinsic(18) binary function != aNumber {
+		this.unfailingIntrinsic("!=");
+	}
+	
+	intrinsic(19) binary function > aNumber {
+		this.unfailingIntrinsic(">");
+	}
+	
+	intrinsic(20) binary function >= aNumber {
+		this.unfailingIntrinsic(">=");
+	}
+	
+	// Bit operations
+	
+	intrinsic(21) binary function & aNumber {
+		this.unfailingIntrinsic("&");
+	}
+	
+	intrinsic(22) binary function | aNumber {
+		this.unfailingIntrinsic("|");
+	}
+	
+	intrinsic(23) binary function ^ aNumber {
+		this.unfailingIntrinsic("^");
+	}
+	
+	intrinsic(24) binary function << aNumber {
+		this.unfailingIntrinsic("<<");
+	}
+	
+	intrinsic(25) binary function >> aNumber {
+		this.unfailingIntrinsic(">>");
+	}
+	
+	// Testing
+	
+	function isUInt8(){
+		return this > 0 & (this < 256);
+	}
+	
+	function isSInt8(){
+		return this >= -128 & (this <= 127);
+	}
+	
+	function isUInt16(){
+		return this > 0 & (this < (1 << 16));
+	}
+	
+	function isSInt16(){
+		return this >= -(1 << 15) & (this < (1 << 15));
+	}
+	
+	function isUInt32(){
+		return this > 0 & (this < (1 << 32));
+	}
+	
+	function isSInt32(){
+		return this >= -(1 << 31) & (this < (1 << 31));
+	}
+	
+	function isUInt64(){
+		return true;
+	}
+	
+	function isSInt64(){
+		return true;
+	}
+}

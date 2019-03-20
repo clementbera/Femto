@@ -1,0 +1,3 @@
+fixedClass HashedCollection(tally,array) extends Collection {
+
+}

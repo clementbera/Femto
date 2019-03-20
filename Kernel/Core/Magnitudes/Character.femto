@@ -1,0 +1,20 @@
+fixedClass Character(charCode) extends Magnitude {
+	// ASCII Character	
+	
+	function getCharCode(){
+		return charCode;
+	}
+	
+	// Minimum comparison behavior
+	binary function < aCharacter {
+		return charCode < aCharacter.getCharCode();
+	}
+	
+	binary function <= aMagnitude {
+		return charCode <= aCharacter.getCharCode();
+	};
+	
+	binary function == aMagnitude {
+		return charCode == aCharacter.getCharCode();
+	};
+}

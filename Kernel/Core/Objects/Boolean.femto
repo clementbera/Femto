@@ -1,0 +1,10 @@
+fixedClass Boolean() extends Object {
+
+	binary abstract function & closureOrBoolean;
+
+	binary abstract function | closureOrBoolean;
+
+	binary abstract function ^ closureOrBoolean;
+
+	abstract function not();
+}

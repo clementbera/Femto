@@ -1,0 +1,24 @@
+arrayClass Array() extends ArrayedCollection {
+	
+	intrinsic(30) function getSize()(){
+		this.unfailingIntrinsic("size");
+	}
+	
+	intrinsic(40) function get(index){
+		this.boundsCheck(index, this.getSize());
+		this.unfailingIntrinsic("get");
+	}
+	
+	intrinsic(41) function put(index,value){
+		this.boundsCheck(index, this.getSize());
+		this.unfailingIntrinsic("put");
+	}
+	
+	function indexOf(value){
+		var i;
+		for(i = 0; i < this.getSize(); i = i + 1){
+			if (this.get(i) = value) {return i;}
+		}
+		return -1;
+	}
+}

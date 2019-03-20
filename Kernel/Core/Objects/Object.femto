@@ -1,0 +1,106 @@
+fixedClass Object() {
+
+	// Utilities & compatibility
+
+	function associationWith(anObject){
+		var association;
+		association = Association.new();
+		association.setKey(this);
+		association.setValue(anObject);
+		return association;
+	}
+	
+	function value(){
+		return this;
+	}
+
+	// Equality
+
+	binary function == anObject{
+		return this === anObject;
+	} 
+
+	binary function != anObject{
+		return this === anObject;
+	}
+
+	intrinsic(1) binary function === anObject{
+		this.unfailingIntrinsic("===");
+	};
+
+	intrinsic(2) binary function !== anObject{
+		this.unfailingIntrinsic("!==");
+	};
+
+	// Basic properties
+
+	intrinsic(3) function getClass(){
+		this.unfailingIntrinsic("class");
+	};
+
+	intrinsic(4) function hashCode(){
+		this.unfailingIntrinsic("hashCode");
+	};
+
+	intrinsic(23) function shallowCopy(){
+		this.unfailingIntrinsic("shallowCopy");
+	};
+	
+	// Invoke Dynamic
+	
+	function invokeDynamic(methodName, arguments){
+		return this.invokeDynamicSignature(String.signature(methodName,arguments.getSize()), arguments);
+	}
+	
+	function invokeDynamic(methodName, lookupClass, arguments){
+		return this.invokeDynamicSignature(String.signature(methodName,arguments.getSize()), lookupClass, arguments);
+	}
+	
+	intrinsic(5) function invokeDynamicSignature(signature, arguments){
+		this.unfailingIntrinsic("invokeDynamicSignature");
+	}
+	
+	intrinsic(6) function invokeDynamicSignature(signature, lookupClass, arguments){
+		this.unfailingIntrinsic("invokeDynamicSignature");
+	}
+	
+	// VM call-backs & interrupt
+
+	function noSuchMethod(virtualCall){
+		this.error("No such method: " , message.getSignature());
+	}
+	
+	function mustBeBoolean(virtualCall){
+		this.error("MustBeBoolean: ");
+	}
+	
+	intrinsic(9) abortExecution(){
+		// Infinite loop if it really gets there...
+		this.unfailingIntrinsic("abortExecution");
+	}
+	
+	function error(messageString){
+		messageString.consoleLog();
+		this.abortExecution();
+	}
+	
+	function unfailingIntrinsic(messageName){
+		this.error(messageName + " should never fail.");
+	}
+	
+	function assert(boolean,messageText){
+		if (boolean.not()){
+			this.error("Assertion failure" + messageText);
+		}
+	}
+	
+	// testing
+
+	function isNull(){
+		return false;
+	}
+
+	function isNotNull(){
+		return true;
+	}
+}

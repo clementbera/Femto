@@ -1,0 +1,95 @@
+Lvl 0
+"Noops & Pseudo Ops"
+	Label 			X			X	"Nothing, ease jump"
+	Literal 		p Literal	X 	"For out of line literal"
+	AlignmentNops 	X			X	"Based on back-end setting and current address align"
+	Fill 			cq numBytes	X	"Reserve space"
+	Nop				X 			X	"Not an operation"
+	
+	"Control"
+	Call			p distance	X	"call within the code zone - usually relative"
+	CallFull		p address	X	"call anywhere within the full address space - usually non relative"
+	RetN			cq numSkip	X
+	JumpR			r			X	"Not a regular jump, i.e. not pc dependent. - typically closure eval, some PIC logic, enilopmart"
+	Stop			X			X	"Halt the processor - DEBUG"
+
+	
+	"N.B.  Jumps are contiguous.  Long and Full jumps are contiguous within them.  See FirstJump et al below"
+	
+	"For trampoline"
+	JumpFull			"Jump anywhere within the address space - trampoline"
+	"Relative jump Next 3 for closed PIC proto, maybe not that useful"
+	JumpLong			"Jump anywhere within the 16mb code zone."
+	JumpLongZero		"a.k.a. JumpLongEqual"
+	JumpLongNonZero		"a.k.a. JumpLongNotEqual"
+	Jump				"short jumps; can be encoded in as few bytes as possible; will not be disturbed by GC or relocation."
+	JumpZero			"a.k.a. JumpEqual"
+	JumpNonZero			"a.k.a. JumpNotEqual"
+	JumpNegative
+	JumpNonNegative
+	JumpOverflow
+	JumpNoOverflow
+	JumpCarry
+	JumpNoCarry
+	JumpLess			"signed"
+	JumpGreaterOrEqual
+	JumpGreater
+	JumpLessOrEqual
+	JumpBelow			"unsigned"
+	JumpAboveOrEqual
+	JumpAbove
+	JumpBelowOrEqual
+	"Double tests"
+	JumpFPEqual
+	JumpFPNotEqual
+	JumpFPLess
+	JumpFPLessOrEqual
+	JumpFPGreater
+	JumpFPGreaterOrEqual
+	JumpFPOrdered
+	JumpFPUnordered
+
+	"Data Movement; destination is always last operand"
+	Cw Cq C8 C16 C32 C64 R Rs Rd
+	MoveRR
+	Move8R MoveR8
+	...
+	MoveRCqR "Read reg obj, distance cst, into reg"
+	MoveCqRR "Write reg obj, distance cst, into reg"
+	MoveRRR  "Read reg obj, reg*size, into reg"
+	MoveRRR  "write reg obj, reg*size, into reg"
+	+ scaled index.
+	...
+	
+	PopR PushR PushCq PushCw
+	PrefetchAw
+
+	"Arithmetic; destination is always last operand except Cmp; CmpXR is SubRX with no update of result"
+	LoadEffectiveAddressMwrR LoadEffectiveAddressXowrR "Variants of add/multiply"
+	NegateR "2's complement negation"
+	NotR	"lowcode"
+	
+	ArithmeticShiftRightCqR ArithmeticShiftRightRR
+	LogicalShiftRightCqR LogicalShiftRightRR
+	LogicalShiftLeftCqR LogicalShiftLeftRR
+	RotateLeftCqR RotateRightCqR
+
+	CmpRR AddRR SubRR AndRR OrRR XorRR
+	CmpCqR AddCqR SubCqR AndCqR OrCqR TstCqR XorCqR
+	CmpCwR CmpC32R AddCwR SubCwR AndCwR OrCwR XorCwR
+	
+	AddcRR AddcCqR 
+	SubbRR SubbCqR
+
+	CmpRdRd AddRdRd SubRdRd MulRdRd DivRdRd SqrtRd XorRdRd
+	CmpRsRs AddRsRs SubRsRs MulRsRs DivRsRs SqrtRs XorRsRs
+
+	"Conversion"
+	ConvertRRd ConvertRdR
+	ConvertRsRd ConvertRdRs ConvertRsR ConvertRRs
+	CallR			r			X		"LOWCODE specific"
+	"Low code specific"
+	SignExtend8RR SignExtend16RR SignExtend32RR
+	ZeroExtend8RR ZeroExtend16RR ZeroExtend32RR
+
+

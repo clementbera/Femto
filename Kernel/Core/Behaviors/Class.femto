@@ -1,0 +1,6 @@
+fixedClass Class(name) extends Object {
+	
+	function getName(){
+		return name;
+	}
+}

@@ -1,0 +1,51 @@
+nativeClass String() extends Object {
+	//Implemented as a byteArray
+	
+	intrinsic(21) function getSize8(){
+		this.unfailingIntrinsic("size (string)");
+	}
+	
+	function getSize(){
+		return.getSize8();
+	}
+	
+	intrinsic(42) function getCharacter(index){
+		//Answers a character
+		this.boundsCheck(index, this.getSize());
+		this.unfailingIntrinsic("getChar (string)");
+	}
+	
+	intrinsic(43) function putCharacter(index,character){
+		this.boundsCheck(index, this.getSize());
+		if (character.getClass() !== Character){
+			this.error("invalid character to put")
+		}
+		this.unfailingIntrinsic("putChar (string)");
+	}
+	
+	intrinsic(44) function getUInt8(index){
+		//Answers a charCode
+		this.boundsCheck(index, this.getSize());
+		this.unfailingIntrinsic("getUInt8 (string)");
+	}
+	
+	intrinsic(45) function putUInt8(index,uInt8){
+		this.boundsCheck(index, this.getSize());
+		if (uInt8.getClass() !== SmallInteger | uInt8.isUInt8().not()){
+			this.error("invalid byte to put")
+		}
+		this.unfailingIntrinsic("putUInt8 (string)");
+	}
+	
+	function indexOfCharacter(character){
+		return this.indexOfByte(character.getCharCode());
+	}
+	
+	function indexOfUInt8(uInt8){
+		var i;
+		for(i = 0; i < this.getSize8(); i = i + 1){
+			if (this.getUInt8(i) = uInt8) {return i;}
+		}
+		return -1;
+	}
+}

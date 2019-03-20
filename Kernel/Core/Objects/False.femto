@@ -1,0 +1,20 @@
+fixedClass Boolean() extends Object {
+	// Logic
+
+	binary function & closureOrBoolean {
+		return this;
+	}
+
+	binary function | closureOrBoolean {
+		return closureOrBoolean.value();
+	}
+
+	binary function ^ closureOrBoolean {
+		return closureOrBoolean.value();
+	}
+
+	function not(){
+		return true;
+	}
+
+}

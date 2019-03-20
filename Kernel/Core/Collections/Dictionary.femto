@@ -1,0 +1,4 @@
+fixedClass Dictionary() extends HashedCollection {
+	// Array of association
+	
+}

@@ -1,0 +1,29 @@
+fixedClass Runtime(globals,specialObjects) extends Object {
+	
+	classSide(current){
+		function getCurrent(){
+			return current;
+		}
+	}
+	
+	function getGlobals(){
+		return globals;
+	}
+	
+	function getSpecialObjects(){
+		return specialObjects;
+	}
+	
+	// 32 - 64 bits compat
+	
+	intrinsic(8) function getPointerSizeInBytes(){
+		this.unfailingPrimitive("getPointerSizeInBytes");
+	}
+	
+	function getNumTagBits(){
+		if (this.getPointerSizeInBytes() == 4){
+			return 2;
+		}
+		return 3;
+	}
+}

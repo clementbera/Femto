@@ -1,0 +1,31 @@
+fixedClass Association(key,value) extends Magnitude {	
+	
+	function getKey(){
+		return key;
+	}
+	
+	function getValue(){
+		return value;
+	}
+	
+	function setKey(anObject){
+		key = anObject;
+	}
+	
+	function setValue(anObject){
+		value = anObject;
+	}
+	
+	// Minimum comparison behavior
+	binary function < anAssociation {
+		return key < anAssociation.getKey();
+	}
+	
+	binary function <= anAssociation {
+		return key <= anAssociation.getKey();
+	};
+	
+	binary function == anAssociation {
+		return key == anAssociation.getKey();
+	};
+}

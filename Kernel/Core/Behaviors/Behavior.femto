@@ -1,0 +1,73 @@
+fixedClass Behavior(superBehavior,methodDictionary,instanceFormat) extends Object {
+	
+	/*instance format
+	saaaaaaaaaaaaaabbbbbbbbcccccc01
+	s sign bit unused
+	aaaaaaaaaaaaaa number of fixed instance variables, 15 bits
+	bbbbbbbb format, up to 8 bits
+	cccccc unused
+	01 tag 
+	
+	format fixed, native, array, immediate, optionally others (weak, etc.) */
+	
+	classSide(){
+		function getFixedFormatIndex(){
+			return 0;
+		}
+	
+		function getNativeFormatIndex(){
+			return 1;
+		}
+	
+		function getArrayFormatIndex(){
+			return 2;
+		}
+	
+		function getImmediateFormatIndex(){
+			return 3;
+		}
+		
+		function getFormatShift(){
+			return 8 - Runtime.getCurrent().getNumTagBits();
+		}
+		
+		function getNumFixedFieldsShift(){
+			return 16 - Runtime.getCurrent().getNumTagBits();
+		}
+	}
+	
+	function setInstanceFormat(format,numFixedFields){
+		instanceFormat 
+			= format << this.getClass().getFormatShift() 
+			+ (numFixedFields << this.getClass().getNumFixedFieldsShift());
+	}
+	
+	function getFormat(){
+		return instanceFormat >> this.getClass().getFormatShift() & 255;
+	}
+	
+	function getNumFixedFields(){
+		return instanceFormat >> this.getClass().getNumFixedFieldsShift() & (1 << 15 - 1);
+	}
+	
+	intrinsic(20) function new(){
+		if (this.getFormat() == this.class.getFixedFormatIndex()) {
+			this.error("Cannot use new on non fixed format")
+		}
+		this.unfailingIntrinsic("new (fixed)");
+	};
+	
+	intrinsic(21) function new(size){
+		if (this.getFormat() == this.class.getArrayFormatIndex()) {
+			this.error("Cannot use new on non array format")
+		}
+		this.unfailingIntrinsic("new (fixed)");
+	};
+	
+	intrinsic(22) function newBytes(size){
+			if (this.getFormat() == this.class.getNativeFormatIndex()) {
+				this.error("Cannot use new on non native array format")
+			}
+			this.unfailingIntrinsic("new (fixed)");
+	};
+}

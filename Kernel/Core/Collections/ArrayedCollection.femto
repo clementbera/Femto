@@ -1,0 +1,8 @@
+fixedClass ArrayedCollection() extends SequenceableCollection {
+	
+	function boundsCheck(index, size){
+		if (index < 0 | (index >= size){
+			this.error("Index out of bounds");
+		}
+	}
+}

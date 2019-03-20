@@ -1,0 +1,47 @@
+fixedClass CompiledCode(header,literals,bytecode) extends Object {
+	/* Header:
+	saaaaaaabbbbbbbbccccccccdddddd01
+	s signBit, unused.
+	aaaaaaa: numArgs 7 bits => up to 127 args
+	bbbbbbbb: numTemps 8 bits => up to 255 temps
+	cccccccc: frameSize 8 bits => up to 255 frameSize
+	dddddd: unused
+	01 tag.
+	*/
+	
+	classSide(){
+		function getNumArgsShift(){
+			return 24 - Runtime.getCurrent().getNumTagBits();
+		}
+		
+		function getNumTempsShift(){
+			return 16 - Runtime.getCurrent().getNumTagBits();
+		}
+		
+		function getFrameSizeShift(){
+			return 8 - Runtime.getCurrent().getNumTagBits();
+		}
+	}
+	
+	function setHeader(numArgs,numTemps,frameSize){
+		this.assert(numArgs < 0 | (numArgs > 127), "invalid numArgs");
+		this.assert(numTemps < 0 | (numTemps > 255), "invalid numTemps");
+		this.assert(frameSize < 0 | (frameSize > 255), "invalid frameSize");
+		header = numArgs << this.getClass().getNumArgsShift() 
+			+ (numTemps << this.getClass().getNumTempsShift()) + 
+			(frameSize << this.getClass().getFrameSizeShift());
+	}
+	
+	function getNumArgs(){
+		return header >> this.getClass().getNumArgsShift();
+	}
+	
+	function getNumTemps(){
+		return header >> this.getClass().getNumTempsShift() & 255;
+	}
+	
+	function getFrameSize(){
+		return header >> this.getClass().getFrameSizeShift() & 255;
+	}
+		
+}

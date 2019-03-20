@@ -1,0 +1,35 @@
+fixedClass Magnitude() extends Object {
+	
+	// Minimum comparison behavior
+	binary abstract function < aMagnitude;
+	binary abstract function <= aMagnitude;
+	binary abstract function == aMagnitude;
+	
+	binary function != aMagnitude {
+		return (this = aMagnitude).not();
+	}
+	
+	binary function >= aMagnitude {
+		return aMagnitude <= this;
+	}
+	
+	binary function > aMagnitude {
+		return aMagnitude < this;
+	}
+	
+	function min(aMagnitude){
+		if (this > aMagnitude){
+			return aMagnitude
+		} else {
+			return this;
+		}
+	}
+	
+	function max(aMagnitude){
+		if (this < aMagnitude){
+			return aMagnitude
+		} else {
+			return this;
+		}
+	}
+}

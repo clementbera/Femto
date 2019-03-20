@@ -1,0 +1,11 @@
+fixedClass Null() extends Object {
+
+	function isNull(){
+		return true;
+	}
+
+	function isNotNull(){
+		return false;
+	}
+
+}

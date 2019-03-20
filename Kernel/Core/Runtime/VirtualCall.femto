@@ -1,0 +1,15 @@
+fixedClass VirtualCall(signature,lookupClass,arguments) extends Object {
+	//LookupClass is nil with normal v-calls, and a class in super v-calls.
+	
+	function getSignature(){
+		return signature;
+	}
+	
+	function getLookupClass(){
+		return lookupClass;
+	}
+	
+	function getArguments(){
+		return arguments;
+	}
+}

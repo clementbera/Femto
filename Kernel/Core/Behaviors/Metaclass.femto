@@ -1,0 +1,3 @@
+fixedClass MetagetClass(theClass) extends Object {
+
+}

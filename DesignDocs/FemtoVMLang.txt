@@ -1,0 +1,74 @@
+Class architecture
+=> StackFrame are not reachable.
+| Object
+RuntimeSupport
+> | Closure > compiledCode, tempVectorOrNil
+| CompiledCode > header literals(Array) bytecode(NativeArray)
+| Message > selector(Symbol), arguments(Array)
+Objects
+| Runtime > specialObjectArray(Array), globals(Dictionary)
+| UndefinedObject
+| Boolean
+|| True
+|| False
+Magnitudes
+| Magnitude
+|| Character 
+|| Association key, value
+|| Number
+||| Integer
+|||| SmallInteger
+>|||| LargeInteger (Boxed Words)
+>||| Double (Boxed)
+Collection
+| Collection
+|| HashedCollection
+||| Dictionary > tally, array
+|| SequenceableCollection
+> ||| OrderedCollection > firstIndex, lastIndex, array
+||| ArrayedCollection
+|||| Array
+|||| NativeArray
+|||| String
+||||| Symbol
+Behavior
+| Behavior > superBehavior(Behavior), methodDict(Dictionary), instanceFormat(SmallInteger)
+|| ClassDescription > instVarNames(Array of Strings)
+||| Class > ClassName(Symbol)
+||| MetaClass > theClass(Class)
+
+"FixedClass/NativeArrayClass/ArrayClass/ImmediateClass(Weak?)"
+
+Memory manager (Always single word header)
+Fmt (Obj, array, native, (Weak)) 	2(8) bits
+classIndex  						16 bits
+hash 								16 bits 
+GC bits 							4(8) bits
+size								16 bits
+
+Minimal number of instructions
+8 push/store temp litVar iv remoteTemp
+pushLit
+pushArg
+push self
+pushClosure
+13 send / superSend
+17 jumpFor/Back/True/False
+ret blockRet
+pop
+21 callPrimitive
+
+Primitives
+Smi 12 + - * // % < > <= >= = != & | ^ << >> asDouble
+consoleLog
+size sizeInBytes at atput: 18 (8 16 32 64 (s/us) p double)
+new new: newBytes: shallowCopy
+hash class == ~~
+value value: valueWithArgs:
+
+Optional... LargeInt 12 
+Double 12 + - * / < > <= >= = != asInteger
+array built-ins
+
+
+

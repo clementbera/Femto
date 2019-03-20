@@ -1,0 +1,65 @@
+nativeClass NativeArray() extends ArrayedCollection {
+	// Can be anything raw :-)
+	
+	// size, get, put
+	function getSize(){
+		this.error("Not applicable (size > NativeArray)");
+	}
+	
+	function get(index){
+		this.error("Not applicable (get > NativeArray)");
+	}
+	
+	function put(index,value){
+		this.error("Not applicable (put > NativeArray)");
+	}
+	
+	intrinsic(21) function getSize8(){
+		this.unfailingIntrinsic("size8");
+	}
+	
+	intrinsic(22) function getSize16(){
+		this.unfailingIntrinsic("size16");
+	}
+	
+	intrinsic(23) function getSize32(){
+		this.unfailingIntrinsic("size32");
+	}
+	
+	intrinsic(24) function getSize64(){
+		this.unfailingIntrinsic("size64");
+	}
+	
+	intrinsic(44) function getUInt8(index){
+		//Answers a charCode
+		this.boundsCheck(index, this.getSize8());
+		this.unfailingIntrinsic("getUInt8 (string)");
+	}
+	
+	intrinsic(45) function putUInt8(index,uInt8){
+		this.boundsCheck(index, this.getSize());
+		if (uInt8.getClass() !== SmallInteger | uInt8.isUInt8().not()){
+			this.error("invalid uInt8 to put")
+		}
+		this.unfailingIntrinsic("putUInt8 (string)");
+	}
+	
+	intrinsic(46) function getSInt8(index){
+		//Answers a charCode
+		this.boundsCheck(index, this.getSize8());
+		this.unfailingIntrinsic("getSInt8 (string)");
+	}
+	
+	intrinsic(47) function putSInt8(index,sInt8){
+		this.boundsCheck(index, this.getSize());
+		if (sInt8.getClass() !== SmallInteger | sInt8.isSInt8().not()){
+			this.error("invalid sInt8 to put")
+		}
+		this.unfailingIntrinsic("putSInt8 (string)");
+	}
+	
+	// 48,51 - int16
+	// 52,55 - int32
+	// 56,59 - int64
+	// 60,61 - double
+}
